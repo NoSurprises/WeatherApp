@@ -25,16 +25,14 @@ class WeatherDataModel : WeatherDataMvpModel {
 
     private fun fetchHttp(url: URL): String {
         with(url.openConnection() as HttpURLConnection) {
-
             val data = StringBuffer()
-            val stream = BufferedReader(InputStreamReader(inputStream))
-            var dataLine = stream.readLine()
-            while (dataLine != null) {
-                data.append(dataLine)
-                dataLine = stream.readLine()
+            BufferedReader(InputStreamReader(inputStream)).use {
+                var dataLine = it.readLine()
+                while (dataLine != null) {
+                    data.append(dataLine)
+                    dataLine = it.readLine()
+                }
             }
-            stream.close()
-            Log.d("daywint", "refceived from the internet ${data.toString()}")
             return data.toString()
         }
     }
@@ -47,19 +45,21 @@ class WeatherDataModel : WeatherDataMvpModel {
         val jsonArray = json.getJSONArray("list")
         for (i in 0..(jsonArray.length() - 1)) {
             val item = jsonArray.getJSONObject(i)
-            val date = item.getString("dt_txt")
+            val dateRaw = item.getString("dt_txt")
 
-            val day = date.split(" ")[0].split("-")[2]
-            val month = date.split(" ")[0].split("-")[1]
-            val hours = date.split(" ")[1].split(":")[0]
+            val day = dateRaw.split(" ")[0].split("-")[2]
+            val month = dateRaw.split(" ")[0].split("-")[1]
+            val hours = dateRaw.split(" ")[1].split(":")[0]
+            val date = "$day-$month-$hours"
 
-            if (forecast.contains(day)) continue;
-            if (!forecast.contains(day) && hours.toInt() > 12) {
-                val temp = item.getJSONObject("main").getString("temp")
-                val description = item.getJSONArray("weather").getJSONObject(0).getString("main")
-                forecast.put(day, temp to description)
+            Log.d("daywint", "$hours   $date")
+            if (hours == "00" || hours == "12") {
+                val temperature = item.getJSONObject("main").getString("temp")
+                val timeOfDay = if (hours == "00") "Night" else "Day"
+                val description = "${item.getJSONArray("weather").getJSONObject(0).getString("main")}:$timeOfDay"
+
+                forecast.put(date, temperature to description)
             }
-            if (hours != "12") continue;
         }
 
 

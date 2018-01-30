@@ -17,7 +17,7 @@ class MainPresenter : MainMvpPresenter {
 
         val forecast = StringBuffer()
         for (i in weather) {
-            forecast.append("day is ${i.key} weather is ${i.value.first}, description is ${i.value.second}\n")
+            forecast.append("day is ${i.key} ${i.value.first} C, ${i.value.second}\n")
         }
         view.setRawData(forecast.toString())
     }
