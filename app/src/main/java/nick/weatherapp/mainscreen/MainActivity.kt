@@ -2,6 +2,7 @@ package nick.weatherapp.mainscreen
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.TextView
 import nick.weatherapp.R
 
 class MainActivity : AppCompatActivity(), MainMvpView {
@@ -13,5 +14,9 @@ class MainActivity : AppCompatActivity(), MainMvpView {
         setContentView(R.layout.activity_main)
 
         presenter.onCreate(this)
+    }
+
+    override fun setRawData(data: String) {
+        findViewById<TextView>(R.id.weather_value).setText(data)
     }
 }
