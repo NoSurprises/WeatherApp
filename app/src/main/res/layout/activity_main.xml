@@ -17,11 +17,6 @@
 
             <include layout="@layout/weather_item" />
 
-            <include layout="@layout/weather_item" />
-
-            <include layout="@layout/weather_item" />
-
-            <include layout="@layout/weather_item" />
         </LinearLayout>
     </ScrollView>
 

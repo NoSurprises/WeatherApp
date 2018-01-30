@@ -37,10 +37,14 @@ class WeatherDataModel : WeatherDataMvpModel {
         }
     }
 
+    private val linkedHashMap: LinkedHashMap<String, Pair<String, String>> = LinkedHashMap()
+
+
     private fun deliverWeatherData(weather: String) {
         val json = JSONObject(weather)
 
         val forecast = LinkedHashMap<String, Pair<String, String>>()
+
 
         val jsonArray = json.getJSONArray("list")
         for (i in 0..(jsonArray.length() - 1)) {
@@ -50,6 +54,7 @@ class WeatherDataModel : WeatherDataMvpModel {
             val day = dateRaw.split(" ")[0].split("-")[2]
             val month = dateRaw.split(" ")[0].split("-")[1]
             val hours = dateRaw.split(" ")[1].split(":")[0]
+
             val date = "$day-$month-$hours"
 
             Log.d("daywint", "$hours   $date")

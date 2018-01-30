@@ -14,11 +14,6 @@ class MainPresenter : MainMvpPresenter {
     }
 
     override fun onWeatherDataLoaded(weather: HashMap<String, Pair<String, String>>) {
-
-        val forecast = StringBuffer()
-        for (i in weather) {
-            forecast.append("day is ${i.key} ${i.value.first} C, ${i.value.second}\n")
-        }
-        view.setRawData(forecast.toString())
+        view.setForecast(weather)
     }
 }
