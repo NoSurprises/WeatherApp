@@ -14,12 +14,21 @@
         android:text="12" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/measurement_system"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_toEndOf="@id/weather_value"
+        android:layout_toEndOf="@+id/weather_value"
         android:text="C" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_toEndOf="@+id/measurement_system"
+        android:text="snow" />
 
     <TextView
         android:id="@+id/date"
