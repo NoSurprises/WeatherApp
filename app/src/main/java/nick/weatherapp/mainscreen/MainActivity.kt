@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity(), MainMvpView {
     }
 
     private fun setDataToView(weatherItem: View, i: Map.Entry<String, Pair<String, String>>) {
-        weatherItem.findViewById<TextView>(R.id.weather_value).setText(i.value.first)
-        weatherItem.findViewById<TextView>(R.id.description).setText(i.value.second)
+        weatherItem.findViewById<TextView>(R.id.weather_day_value).setText(i.value.first)
+        weatherItem.findViewById<TextView>(R.id.day_description).setText(i.value.second)
         weatherItem.findViewById<TextView>(R.id.date).setText(i.key)
     }
 }

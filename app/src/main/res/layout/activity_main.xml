@@ -26,7 +26,7 @@
             android:textSize="64sp" />
 
         <TextView
-            android:id="@+id/measurement_system"
+            android:id="@+id/measurement_system_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -64,11 +64,8 @@
             android:paddingStart="16dp">
 
             <include layout="@layout/weather_item" />
-
             <include layout="@layout/weather_item" />
-
             <include layout="@layout/weather_item" />
-
             <include layout="@layout/weather_item" />
             <include layout="@layout/weather_item" />
 
