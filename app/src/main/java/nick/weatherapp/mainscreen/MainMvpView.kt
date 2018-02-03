@@ -1,5 +1,8 @@
 package nick.weatherapp.mainscreen
 
 interface MainMvpView {
-    fun setRawData(data: String)
+    fun setChildDayWeather(i: Int, tmp: String)
+    fun setChildNightWeather(i: Int, tmp: String)
+    fun setChildDayDescription(i: Int, description: String)
+    fun setChildNightDescription(i: Int, description: String)
 }

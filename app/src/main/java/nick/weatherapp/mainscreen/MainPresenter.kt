@@ -1,5 +1,7 @@
 package nick.weatherapp.mainscreen
 
+import data.OneDayWeather
+
 class MainPresenter : MainMvpPresenter {
 
     private lateinit var view: MainMvpView
@@ -13,12 +15,13 @@ class MainPresenter : MainMvpPresenter {
         model.loadWeatherDataFromInternet()
     }
 
-    override fun onWeatherDataLoaded(weather: HashMap<String, Pair<String, String>>) {
-
-        val forecast = StringBuffer()
-        for (i in weather) {
-            forecast.append("day is ${i.key} weather is ${i.value.first}, description is ${i.value.second}\n")
+    override fun onWeatherDataLoaded(weather: Array<OneDayWeather>) {
+        for (i in 0..weather.size - 1) {
+            val item = weather[i]
+            view.setChildDayWeather(i, item.dayWeather ?: "777")
+            view.setChildNightWeather(i, item.nightWeather ?: "777")
+            view.setChildDayDescription(i, item.dayDescription ?: "777")
+            view.setChildNightDescription(i, item.nightDescription ?: "777")
         }
-        view.setRawData(forecast.toString())
     }
 }
