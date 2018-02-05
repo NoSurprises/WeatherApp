@@ -62,11 +62,11 @@ class WeatherDataModel : WeatherDataMvpModel {
 
             Log.d("daywint", "$hours   $date")
 
-            // filter off non median balues
+            // filter off non median values
             if (hours == "00" || hours == "12") {
                 val temperature = item.getJSONObject("main").getString("temp")
                 val timeOfDay = if (hours == "00") "Night" else "Day"
-                val description = "${item.getJSONArray("weather").getJSONObject(0).getString("main")}:$timeOfDay"
+                val description = item.getJSONArray("weather").getJSONObject(0).getString("main")
 
 
                 // get or create weather dto object
@@ -75,7 +75,7 @@ class WeatherDataModel : WeatherDataMvpModel {
                 if (!forecast.containsKey(date)) {
                     weatherDTO = OneDayWeather(date = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(dateRaw))
                 } else {
-                    weatherDTO = forecast.get(date);
+                    weatherDTO = forecast.get(date)
                 }
 
 
@@ -87,9 +87,6 @@ class WeatherDataModel : WeatherDataMvpModel {
                     weatherDTO?.dayDescription = description
                     weatherDTO?.dayWeather = temperature
                 }
-
-
-
 
                 forecast.put(date, weatherDTO!!)
             }
