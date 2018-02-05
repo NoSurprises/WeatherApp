@@ -11,8 +11,14 @@ class MainPresenter : MainMvpPresenter {
     override fun onCreate(mvpView: MainMvpView) {
         view = mvpView
 
+        view.startLoadingAnimation()
         model.setDataLoadingListener(this)
-        model.loadWeatherDataFromInternet()
+        model.load5dayWeatherDataFromInternet()
+    }
+
+    override fun onFailLoadingWeatherData() {
+        view.cancelLoadingAnimation()
+        view.showMessage("Failed to load weather")
     }
 
     override fun onWeatherDataLoaded(weather: Array<OneDayWeather>) {
@@ -23,5 +29,12 @@ class MainPresenter : MainMvpPresenter {
             view.setChildDayDescription(i, item.dayDescription ?: "777")
             view.setChildNightDescription(i, item.nightDescription ?: "777")
         }
+
+        view.cancelLoadingAnimation()
+    }
+
+    override fun onAllWeatherRefresh() {
+        view.startLoadingAnimation()
+        model.load5dayWeatherDataFromInternet()
     }
 }

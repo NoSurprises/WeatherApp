@@ -15,14 +15,17 @@ import java.text.SimpleDateFormat
 class WeatherDataModel : WeatherDataMvpModel {
 
     val urlString = "http://api.openweathermap.org/data/2.5/forecast?q=Moscow,ru&APPID=79790e8ed9ebca76ad012d5d4fd79045&units=metric"
-    var weatherDataListener: MainMvpPresenter? = null
+    var presenter: MainMvpPresenter? = null
 
-    override fun loadWeatherDataFromInternet() {
+    override fun load5dayWeatherDataFromInternet() {
         val url = URL(urlString)
         Single.fromCallable { fetchHttp(url) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { data -> deliverWeatherData(data) }
+                .subscribe(
+                        { data -> deliverWeatherData(data) },
+                        { presenter?.onFailLoadingWeatherData() }
+                )
     }
 
     private fun fetchHttp(url: URL): String {
@@ -92,10 +95,10 @@ class WeatherDataModel : WeatherDataMvpModel {
             }
         }
 
-        weatherDataListener?.onWeatherDataLoaded(forecast.values.toTypedArray())
+        presenter?.onWeatherDataLoaded(forecast.values.toTypedArray())
     }
 
     override fun setDataLoadingListener(listener: MainMvpPresenter) {
-        weatherDataListener = listener
+        presenter = listener
     }
 }

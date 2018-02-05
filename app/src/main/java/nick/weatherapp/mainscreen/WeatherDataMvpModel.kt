@@ -7,5 +7,5 @@ package nick.weatherapp.mainscreen
 interface WeatherDataMvpModel {
 
     fun setDataLoadingListener(listener: MainMvpPresenter)
-    fun loadWeatherDataFromInternet()
+    fun load5dayWeatherDataFromInternet()
 }
