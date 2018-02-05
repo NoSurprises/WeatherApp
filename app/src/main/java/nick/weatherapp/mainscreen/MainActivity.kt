@@ -35,18 +35,22 @@ class MainActivity : AppCompatActivity(), MainMvpView {
     }
 
     override fun setChildDayDescription(i: Int, description: String) {
-        itemsContainer.getChildAt(i).findViewById<TextView>(R.id.day_description).setText(description)
+        itemsContainer.getChildAt(i).findViewById<TextView>(R.id.day_description).text = description
     }
 
     override fun setChildDayWeather(i: Int, tmp: String) {
-        itemsContainer.getChildAt(i).findViewById<TextView>(R.id.weather_day_value).setText(tmp)
+        itemsContainer.getChildAt(i).findViewById<TextView>(R.id.weather_day_value).text = tmp
     }
 
     override fun setChildNightDescription(i: Int, description: String) {
-        itemsContainer.getChildAt(i).findViewById<TextView>(R.id.night_description).setText(description)
+        itemsContainer.getChildAt(i).findViewById<TextView>(R.id.night_description).text = description
     }
 
     override fun setChildNightWeather(i: Int, tmp: String) {
-        itemsContainer.getChildAt(i).findViewById<TextView>(R.id.night_value).setText(tmp)
+        itemsContainer.getChildAt(i).findViewById<TextView>(R.id.night_value).text = tmp
+    }
+
+    override fun setChildDate(i: Int, date: String) {
+        itemsContainer.getChildAt(i).findViewById<TextView>(R.id.date).text = date
     }
 }
